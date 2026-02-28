@@ -1,0 +1,54 @@
+FROM --platform=linux/386 alpine:3.19
+
+# Aggiorna e installa pacchetti
+RUN apk update && apk upgrade && \
+    apk add --no-cache \
+        bash \
+        gcc \
+        python3 \
+        vim \
+        unzip \
+        ruby \
+        nodejs \
+        fakeroot \
+        dbus \
+        whiptail \
+        hexedit \
+        patch \
+        man-pages \
+        file \
+        luajit \
+        make \
+        lua5.4 \
+        dialog \
+        curl \
+        less \
+        cowsay \
+        netcat-openbsd \
+        shadow
+
+# Crea utente
+RUN useradd -m -s /bin/bash user && \
+    echo "user:password" | chpasswd
+
+# Copia file
+COPY --chown=user:user ./examples /home/user/examples
+
+RUN chmod -R +x /home/user/examples/lua
+
+# Imposta working directory
+WORKDIR /home/user/
+
+# Variabili ambiente
+ENV HOME="/home/user" \
+    TERM="xterm" \
+    USER="user" \
+    SHELL="/bin/bash" \
+    EDITOR="vim" \
+    LANG="en_US.UTF-8" \
+    LC_ALL="C"
+
+# Password root
+RUN echo "root:password" | chpasswd
+
+CMD ["/bin/bash"]
