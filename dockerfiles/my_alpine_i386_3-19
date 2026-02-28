@@ -10,6 +10,7 @@ RUN apk update && apk upgrade && \
         unzip \
         ruby \
         nodejs \
+        npm \
         fakeroot \
         dbus \
         whiptail \
