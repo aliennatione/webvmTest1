@@ -15,6 +15,7 @@ RUN apk update && apk upgrade && \
         whiptail \
         hexedit \
         patch \
+        wordlists \
         man-pages \
         file \
         luajit \
