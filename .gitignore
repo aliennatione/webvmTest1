@@ -2,3 +2,5 @@
 /.svelte-kit
 pnpm-lock.yaml
 build/
+
+*.ext2
